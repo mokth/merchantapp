@@ -1,0 +1,220 @@
+<div class="">
+  <form [formGroup]="bizForm">
+    <div class="row">
+      <div class="col-md-5">
+        <!-- biz hours -->
+        <div class="card ">
+          <div class="card-header">
+            <h6><fa-icon [icon]="faCalendar"></fa-icon> {{"bizhr.bizhr" | translate }}</h6>
+          </div>
+         
+          <div class="card-body">
+            <!-- Set As work/off day -->
+            <div class="row form-group">
+              <div class="col">
+                <div class="row">
+                  <div class="col-3">
+                    <dx-check-box text='{{"bizhr.setas" | translate }}' (onValueChanged)="checkBox_valueChanged($event)" [(value)]="checkBoxValue">
+                    </dx-check-box>
+                  </div>
+                  <div class="col-9">
+                    <dx-radio-group formControlName="workday" [items]="priorities" [value]="priorities[0]" [disabled]="disabledWorkDay" (onValueChanged)="onWokDayChanged($event)"
+                      layout="horizontal">
+                    </dx-radio-group>
+                  </div>
+                </div>
+              </div>
+            </div>
+           <div class="row">
+              <div class="form-group col-6">
+                  <label for="repeat">{{"bizhr.repeated" | translate }}</label>
+                  <dx-select-box [items]="repeats" formControlName="repeatOn" [showClearButton]="true"></dx-select-box>
+              </div>    
+              <div class="form-group col-6">
+                  <label for="repeat">{{"bizhr.onday" | translate }}</label>
+                  <dx-select-box [items]="dayNames" formControlName="dayNameOn" [showClearButton]="true"></dx-select-box>
+              </div>          
+           </div>
+
+           <div class="row">
+              <div class="form-group col-6">
+                  <label for="repeat">{{"bizhr.fromtime" | translate }}</label>
+                  <dx-date-box formControlName="fromtime1" [disabled]="timeDisabled" type="time">
+                    </dx-date-box>
+              </div>    
+              <div class="form-group col-6">
+                  <label for="repeat">{{"bizhr.totime" | translate }}</label>
+                  <dx-date-box formControlName="totime1" [disabled]="timeDisabled" type="time">
+                  </dx-date-box>
+              </div>          
+           </div>
+           <div class="row">
+              <div class="form-group col-6">
+                  <dx-date-box formControlName="fromtime2" [disabled]="timeDisabled" type="time">
+                    </dx-date-box>
+              </div>    
+              <div class="form-group col-6">
+                  <dx-date-box formControlName="totime2" [disabled]="timeDisabled" type="time">
+                    </dx-date-box>
+              </div>          
+           </div>
+           <!-- Calandar -->
+            <div class="row">
+              <div class="col">
+                <div class="widget-container">
+                  <dx-calendar #calendar id="calendar-container" [disabled]="false" [min]="minDate" [max]="maxDate" [firstDayOfWeek]="firstDay"
+                    [(value)]="currentValue" [zoomLevel]="zoomLevels" (onValueChanged)="calendar_valueChanged($event)">
+                    <span *dxTemplate="let cell of 'cell'" [ngClass]="getCellCssClass(cell.date)">
+                      {{cell.text}}
+                    </span>
+                  </dx-calendar>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-7">
+          <button id="myModel" type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#optionModal">
+              <fa-icon [icon]="faHourglass"></fa-icon> {{"bizhr.setdaily" | translate }}
+            </button>
+        <dx-data-grid id="gridContainer" 
+            [rowAlternationEnabled]="true" 
+            [dataSource]="bizhrs" 
+            (onRowClick)="onBizHrsRowClick($event)"
+            (onRowRemoving)="onBizHrsDeleting($event)">
+            <dxi-column dataField='workDate' caption='{{"bizhr.date" | translate }}' dataType="date" width="90"></dxi-column>
+            <dxi-column dataField='dayType' caption='{{"bizhr.datetype" | translate }}' dataType="string" width="80"></dxi-column>
+            <dxi-column dataField='fromHour' caption='{{"bizhr.fromtime" | translate }}' format="hh:mm a" dataType="'datetime" width="90"></dxi-column>
+            <dxi-column dataField='toHour' caption= '{{"bizhr.totime" | translate }}' format="hh:mm a" dataType="'datetime" width="90"></dxi-column>
+            <dxi-column dataField='repeatType' caption='{{"bizhr.repeated" | translate }}' dataType="string" width="90"></dxi-column>
+            <dxi-column dataField='dayName' caption='{{"bizhr.onday" | translate }}' dataType="string" width="90"></dxi-column>
+            <dxi-column caption='{{"bizhr.action" | translate }}' cellTemplate="actionCellTemplate" [width]="70"></dxi-column>
+            <div *dxTemplate="let d of 'actionCellTemplate'">
+                <div class="row">
+                    <div class="col">
+                        <button type="button" (click)="onDelete(d.data)" 
+                                class="btn btn-sm btn-outline-danger btn-block">
+                                <fa-icon [icon]="faDelete"></fa-icon></button>
+                    </div>
+                  </div>
+            </div>
+        </dx-data-grid>
+        <hr>
+        <div class="row">
+          <div class="col-md-6">
+          </div>
+          <div class="col-md-3 col-6">
+            <button (click)="SaveBizHours()" 
+             class="btn btn-sm btn-outline-info btn-block">
+             <fa-icon [icon]="faSave"></fa-icon><span> {{"bizhr.save" | translate }} </span> 
+            </button>
+          </div>
+          <div class="col-md-3 col-6">
+            <button (click)="CancelBizHours()"
+              class="btn btn-sm btn-outline-danger btn-block">
+              <fa-icon [icon]="faCancel"></fa-icon><span> {{"bizhr.cancel" | translate }}</span>
+            </button>
+          </div>
+        </div>
+        <br>
+      </div>
+
+    </div>
+  </form>
+</div>
+
+<!-- Modal Daily Biz hrs-->
+<button id="myModel" type="button" style="display:none" class="btn btn-primary" data-toggle="modal" data-target="#optionModal"></button>
+<form [formGroup]="bizHour" novalidate>
+  <div class="modal fade" id="optionModal" tabindex="-1" role="dialog" aria-labelledby="optionModalLabel" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="optionModalLabel"> <fa-icon [icon]="faHourglass"></fa-icon> {{"bizhr.setdaily" | translate }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="bizhourDiv">
+            <div class="row">
+              <div class="col">
+                <h6>{{"bizhr.bizhr" | translate }}</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="row">
+                  <div class="col ">
+                    <div class="bizHours">{{"bizhr.from" | translate }} </div>
+                  </div>
+                  <div class="col ">
+                      <div class="bizHours">{{"bizhr.to" | translate }} </div>
+                  </div>
+                </div>  
+                <div class="row">
+                    <div class="col">
+                        <dx-date-box formControlName="bizfromtime1" type="time">
+                          </dx-date-box>
+                    </div>
+                    <div class="col">
+                        <dx-date-box formControlName="biztotime1" type="time">
+                          </dx-date-box>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <dx-date-box formControlName="bizfromtime2" type="time">
+                          </dx-date-box>
+                    </div>
+                    <div class="col">
+                        <dx-date-box formControlName="biztotime2" type="time">
+                          </dx-date-box>
+                    </div>
+                </div>
+                
+                <hr>
+                <div class="row">
+                  <div class="col">
+                    <h6>{{"bizhr.offdayon" | translate }}</h6>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <p class="bizHours">{{"bizhr.repeated" | translate }}</p>
+                    <dx-select-box [items]="offDayRepeats" formControlName="repeat" (onValueChanged)="onRepeatedChanged($event)" [showClearButton]="true"></dx-select-box>
+                  </div>
+                  <div class="col">
+                    <p class="bizHours">{{"bizhr.on" | translate }}</p>
+                    <dx-select-box *ngIf="isWeekly" [items]="dayNames" formControlName="dayName" [showClearButton]="true">
+                      </dx-select-box>
+                      <dx-number-box *ngIf="!isWeekly" [min]="1" [max]="31" formControlName="dayName" placeholder="day number">
+                      </dx-number-box>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" 
+              (click)="SaveDailyBizHr()" 
+              [disabled]="!bizHour.valid" 
+              class="btn btn-outline-info">
+              <fa-icon [icon]="faSave"></fa-icon><span>  {{"bizhr.save" | translate }} </span></button>
+          <button id="closemodel" type="button"
+              class="btn btn-outline-danger" 
+              data-dismiss="modal">
+              <fa-icon [icon]="faCancel"></fa-icon><span> {{"bizhr.cancel" | translate }} </span></button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- Modal Daily Biz hrs-->

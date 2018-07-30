@@ -1,0 +1,201 @@
+<div class="container">
+  <div class="griditem">
+    <div class="row">
+      <div class="col-md-1">
+          <button (click)="onNewItem()" class="btn btn-sm btn-outline-info btn-block">
+              <fa-icon [icon]="faAdd"></fa-icon>
+          </button>
+      </div>
+    </div>
+    <div class="row" *ngIf="!isSmallScreen">
+      <div class="col">
+        <dx-data-grid #dataGrid 
+          [rowAlternationEnabled]="true" 
+          [dataSource]="userlist" 
+          [wordWrapEnabled]="true">
+          <dxi-column dataField="id" caption='{{"user.id" | translate }}' [width]="150" visibleIndex="1"></dxi-column>
+          <dxi-column dataField="name" caption='{{"user.name" | translate }}'  visibleIndex="2"></dxi-column>
+          <dxi-column dataField="role" caption='{{"user.role" | translate }}' [width]="150" visibleIndex="3"></dxi-column>
+          <dxi-column dataField="active" caption='{{"user.active" | translate }}' [width]="110" visibleIndex="4"></dxi-column> 
+          <dxi-column caption="Action" caption='{{"user.action" | translate }}' cellTemplate="actionCellTemplate" [width]="90" visibleIndex="6"></dxi-column>
+          <div *dxTemplate="let d of 'actionCellTemplate'">
+            <div class="row">
+              <div class="col">
+                <button (click)="onNewItem()" class="btn btn-sm btn-outline-info btn-block">
+                    <fa-icon [icon]="faAdd"></fa-icon>
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <button (click)="onEditItem(d.data)" class="btn btn-sm btn-outline-info btn-block">
+                    <fa-icon [icon]="faEdit"></fa-icon>
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <button class="btn btn-sm btn-outline-danger btn-block"
+                  mwlConfirmationPopover
+                  [appendToBody]="true"
+                  [popoverTitle]="popoverTitle"
+                  [popoverMessage]="popoverMessage"
+                  placement="top"
+                  (confirm)="onDeleteItem(d)"
+                  (cancel)="cancelClicked = true"
+                  >
+                  <fa-icon [icon]="faDelete"></fa-icon>
+                </button>
+              </div>
+              <!-- (onConfirm)="onDeleteItem(d)" -->
+            </div>
+          </div>
+        
+        </dx-data-grid>
+    </div>
+    </div>
+    <!--small screen-->
+    <div class="row" *ngIf="isSmallScreen">
+      <div class="col">
+        <dx-data-grid #dataGrid 
+          [rowAlternationEnabled]="true" 
+          [dataSource]="userlist" 
+          [wordWrapEnabled]="true">
+          <dxi-column caption='{{"user.user" | translate }}' cellTemplate="infoCellTemplate" visibleIndex="1"></dxi-column>
+          <dxi-column caption='{{"user.action" | translate }}' cellTemplate="actionCellTemplate" width="70"visibleIndex="2"></dxi-column>
+          <div *dxTemplate="let d of 'infoCellTemplate'">
+            <div class="row">
+              <div class="col">
+                <small class="smTitle">{{"user.id" | translate }}</small>
+                <div class="mycol">{{d.data.id}}</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <small class="smTitle">{{"user.name" | translate }}</small>
+                <div class="mycol">{{d.data.name}}</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <small class="smTitle">{{"user.role" | translate }}</small>
+                <div class="mycol">{{d.data.role}}</div>
+              </div>
+              <div class="col">
+                  <small class="smTitle">{{"user.active" | translate }}</small>
+                  <div class="mycol">{{d.data.active}}</div>
+                </div>
+            </div>
+          
+          </div>
+
+          <div *dxTemplate="let d of 'actionCellTemplate'">
+            <div class="row">
+              <div class="col">
+                <button (click)="onNewItem()" class="btn btn-sm btn-outline-info btn-block">
+                    <fa-icon [icon]="faAdd"></fa-icon>
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <button (click)="onEditItem(d.data)" class="btn btn-sm btn-outline-info btn-block">
+                    <fa-icon [icon]="faEdit"></fa-icon>
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <button class="btn btn-sm btn-outline-danger btn-block"
+                  mwlConfirmationPopover
+                  [appendToBody]="true"
+                  [popoverTitle]="popoverTitle"
+                  [popoverMessage]="popoverMessage"
+                  placement="top"
+                  (confirm)="onDeleteItem(d)"
+                  (cancel)="cancelClicked = true"
+                  >
+                  <fa-icon [icon]="faDelete"></fa-icon>
+                </button>
+              </div>
+              <!-- (onConfirm)="onDeleteItem(d)" -->
+            </div>
+          </div>
+        
+        </dx-data-grid>
+      </div>
+      </div>
+  </div>
+
+</div>
+
+ <!-- Modal Images-->
+<button id="myModel" type="button" data-backdrop="static" data-keyboard="false" style="display:none" class="btn btn-primary"
+  data-toggle="modal" data-target="#optionModal2"></button>
+<div class="modal fade" id="optionModal2" tabindex="-1" role="dialog" aria-labelledby="optionModalLabel2" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="optionModalLabel2">{{title}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="userForm">
+          <div class="form-group">
+            <label for="userid" class="col-form-label">{{"user.idemail" | translate }}</label>
+            <input type="email"
+              [readonly]="editMode" 
+               formControlName="email" class="form-control" id="userid">
+
+          </div>
+          <div class="form-group">
+            <label for="name" class="col-form-label">{{"user.name" | translate }}</label>
+            <input type="text" formControlName="name"  class="form-control" id="name">
+          </div>
+          <div class="form-group">
+            <label for="urole" class="col-form-label">{{"user.role" | translate }}</label>
+            <dx-select-box id="urole"  formControlName="role"  class="form-control" [items]="roles" [showClearButton]="true"></dx-select-box>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" formControlName="status" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label"  for="exampleCheck1">{{"user.active" | translate }}</label>
+          </div>
+        </form>        
+
+      </div>
+      <div class="modal-footer">
+          <div class="row" *ngIf="errmsg">
+              <div class="col">
+                  <div class="alert alert-danger" role="alert">
+                     {{errmsg}}}
+                    </div>
+              </div>
+            </div>
+        <button type="submit"
+        [disabled]= "!userForm.valid"
+           (click)="SaveUser()"
+           class="btn btn-outline-info">
+           <fa-icon [icon]="faSave"></fa-icon> {{"user.save" | translate }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+

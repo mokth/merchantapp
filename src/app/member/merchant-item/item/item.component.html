@@ -1,0 +1,1009 @@
+<form class="itemForm" [formGroup]="itemForm">
+  <div class="">
+    <!-- <h4>ITEM PROFILE</h4> -->
+    <!--Item Info -->
+    <div class="card border-light">
+      <div class="card-header">
+        <fa-icon [icon]="faCaretRight"></fa-icon>
+        <span> {{"item.iteminfo" | translate }}</span>
+      </div>
+      <div class="card-body">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="ItemCode" class="control-label required">{{"item.itemcode" | translate }}</label>
+            <input type="text" class="form-control" formControlName="ItemCode" id="ItemCode">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="iname" class="control-label required">{{"item.itemname" | translate }}</label>
+            <input type="text" class="form-control" formControlName="ItemName" id="iname">
+          </div>
+        </div>
+        <div class="form-row">          
+          <div class="form-group  col-md-6">
+            <label for="itype" class="control-label required">{{"item.itemtype" | translate }}</label>
+            <dx-select-box [items]="itemTypes" formControlName="ItemType" [showClearButton]="true"></dx-select-box>
+          </div>
+          <div class="form-group  col-md-6">
+            <label for="status">{{"item.itemstatus" | translate }}</label>
+            <dx-select-box [items]="status" formControlName="ItemStatus" [showClearButton]="true"></dx-select-box>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Item Info -->
+
+    <!--Item details -->
+    <div class="card border-light">
+      <div class="card-header">
+        <fa-icon [icon]="faCaretRight"></fa-icon>
+        <span> {{"item.detail" | translate }}</span>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label for="idetals">{{"item.detailen" | translate }}</label>
+          <textarea type="text" class="form-control" formControlName="ItemDetail">
+          </textarea>
+        </div>
+        <div class="form-group">
+          <label for="idetals">{{"item.detailbm" | translate }}</label>
+          <textarea type="text" class="form-control" formControlName="ItemDetailBM">
+          </textarea>
+        </div>
+        <div class="form-group">
+          <label for="idetals">{{"item.detailcn" | translate }}</label>
+          <textarea type="text" class="form-control" formControlName="ItemDetailCN">
+          </textarea>
+        </div>
+      </div>
+    </div>
+    <!--Item details -->
+
+    <!--Item category -->
+    <div class="card border-light">
+      <div class="card-header">
+        <fa-icon [icon]="faCaretRight"></fa-icon>
+        <span> {{"item.category" | translate }}</span>
+      </div>
+      <div class="card-body">
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="icategory">{{"item.category" | translate }}</label>
+            <dx-select-box [items]="categories" formControlName="ItemCategory" [showClearButton]="true"></dx-select-box>
+          </div>
+          <div class="form-group col-md-9">
+            <label for="status">{{"item.itemtag" | translate }}</label>
+            <dx-tag-box [items]="itemtags" formControlName="ItemTag" (onValueChanged)="onValueChanged($event)" [showSelectionControls]="true"
+              applyValueMode="useButtons">
+            </dx-tag-box>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="icategory1">{{"item.subcategory1" | translate }}</label>
+            <dx-select-box [items]="subcategories" formControlName="SubCategory1" [showClearButton]="true"></dx-select-box>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="icategory2">{{"item.subcategory2" | translate }}</label>
+            <dx-select-box [items]="subcategories" formControlName="SubCategory2" [showClearButton]="true"></dx-select-box>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="icategory3">{{"item.subcategory3" | translate }}</label>
+            <dx-select-box [items]="subcategories" formControlName="SubCategory3" [showClearButton]="true"></dx-select-box>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="subcategories">{{"item.subcategory4" | translate }}</label>
+            <dx-select-box [items]="categories" formControlName="SubCategory4" [showClearButton]="true"></dx-select-box>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Item category -->
+
+    <!--Effective Date -->
+    <div class="card border-light">
+      <div class="card-header">
+        <fa-icon [icon]="faCaretRight"></fa-icon>
+        <span> {{"item.effectivedate" | translate }}</span>
+      </div>
+      <div class="card-body">
+        <div class="form-row">
+          <div class="form-group col-md-2">
+            <label for="effectiveFrom">{{"item.effective" | translate }}</label>
+            <dx-check-box class="form-control" formControlName="SetEffective">
+            </dx-check-box>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="effectiveFrom">{{"item.effectivefr" | translate }}</label>
+            <dx-date-box class="form-control" [value]="now" formControlName="EffectiveFrom" type="datetime">
+            </dx-date-box>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="effectiveTo">{{"item.effectiveto" | translate }}</label>
+            <dx-date-box class="form-control" [value]="now" formControlName="EffectiveTo" type="datetime">
+            </dx-date-box>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Effective Date -->
+
+    <!--Item Prices -->
+    <div class="card border-light">
+      <div class="card-header">
+        <fa-icon [icon]="faCaretRight"></fa-icon>
+        <span> {{"item.itemprice" | translate }}</span>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <!-- <div class="col" [style.background]="getItemImageUrl()"
+                [style.background-position]="'center'"
+                [style.background-size]="'cover'"
+                [style.background-repeat]="'no-repeat'"
+                > -->
+          <div class="col-md-4" *ngIf="editMode">
+            <a (click)="OnItemImages()">
+              <img class="img-fluid itemimg" src="{{itemImgUrl}}" /> </a>
+            <div>
+              <dx-file-uploader #fileUploaderItem 
+                   [multiple]="false" 
+                   selectButtonText='{{"item.selectimage" | translate }}'
+                   labelText='{{"item.dropimage" | translate }}'
+                   uploadButtonText='{{"item.uploadimage" | translate }}'
+                   [uploadHeaders]='uploadHeader()' 
+                   uploadUrl="{{apiUrl}}api/items/itemimage?id={{item.itemCode}}" 
+                   accept="*"
+                   (onUploaded)="onItemImageUploaded($event)" 
+                   (onValueChanged)="OnItemFileChange($event)" (onUploadError)="handleNetworkError($event)"
+                   uploadMode="useButtons"></dx-file-uploader>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="priceType">{{"item.pricetype" | translate }}</label>
+                <dx-select-box [items]="optionTypes" (onValueChanged)="onPriceTypeChanged($event)" formControlName="PriceType"></dx-select-box>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="prepareTime">{{"item.preparetime" | translate }}</label>
+                <input type="text" class="form-control" formControlName="PrepareTime">
+              </div>
+            </div>
+            <!--cost price -->
+            <div class="form-row row">
+              <div class="form-group col">
+                <label for="priceType" class="control-label required">{{"item.costprice" | translate }}</label>
+                <dx-number-box formControlName="CostPrice" format="#,##0.00"  [showClearButton]="true"></dx-number-box>
+              </div>
+              <div class="form-group col">
+                <label for="priceType">{{"item.taxamount" | translate }}</label>
+                <dx-number-box formControlName="CostTaxAmount" format="#,##0.00"  [showClearButton]="true"></dx-number-box>
+              </div>
+              <div class="form-group col">
+                <label for="priceType" class="control-label required">{{"item.totalcost" | translate }}</label>
+                <dx-number-box formControlName="CostWithGST" format="#,##0.00"  [showClearButton]="true"></dx-number-box>
+              </div>
+            </div>
+            <!--cost price -->
+            <!--selling price -->
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="priceType" class="control-label required">{{"item.sellprice" | translate }}</label>
+                <dx-number-box formControlName="SellingPrice" format="#,##0.00"  [showClearButton]="true"></dx-number-box>
+              </div>
+              <div class="form-group col">
+                <label for="priceType">{{"item.taxamount" | translate }}</label>
+                <dx-number-box formControlName="TaxAmount" format="#,##0.00"  [showClearButton]="true"></dx-number-box>
+              </div>
+              <div class="form-group col">
+                <label for="priceType" class="control-label required">{{"item.totalsell" | translate }}</label>
+                <dx-number-box formControlName="PriceWithGST" format="#,##0.00" [showSpinButtons]="false" [showClearButton]="true"></dx-number-box>
+              </div>
+            </div>
+            <!--selling price -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Item Prices -->
+
+    <!--Option -->
+    <div class="card border-light" *ngIf="editMode">
+      <div class="card-header">
+        <fa-icon [icon]="faCaretRight"></fa-icon>
+        <span> {{"item.optionset" | translate }}</span>
+      </div>
+      <div class="card-body">
+        <!-- item options-->
+        <div class="form-row">
+          <div class="row">
+            <div class="col">
+              <button (click)="onNewOption()" data-toggle="tooltip" 
+                 data-placement="top" 
+                 title='{{"item.addoption" | translate }}' class="btn btn-sm btn-outline-info btn-block">
+                <fa-icon [icon]="faAdd"></fa-icon>
+              </button>
+            </div>
+          </div>
+           <!-- big screen-->
+          <div class="row" *ngIf="!isSmallScreen">
+            <div class="form-group col">
+              <dx-data-grid id="gridOption" [rowAlternationEnabled]="true" [dataSource]="optionArr" [wordWrapEnabled]="true">
+                <dxi-column caption='{{"item.pricetype" | translate }}' cellTemplate="infoTemplate" width="110">
+                </dxi-column>
+                <dxi-column caption='{{"item.description" | translate }}' cellTemplate="descTemplate">
+                </dxi-column>
+                <dxi-column caption='{{"item.costprice" | translate }}' cellTemplate="costTemplate" width="110">
+                </dxi-column>
+                <dxi-column caption='{{"item.sellprice" | translate }}' cellTemplate="sellTemplate" width="110">
+                </dxi-column>
+                <dxi-column caption='{{"item.image" | translate }}' cellTemplate="imageTemplate" width="200">
+                </dxi-column>
+                <dxi-column caption='{{"item.action" | translate }}' cellTemplate="actionTemplate" width="70">
+                </dxi-column>
+                <div *dxTemplate="let d of 'infoTemplate'">
+                  <div class="row">
+                    <div class="col">
+                      <small>{{"item.optiontype" | translate }}</small>
+                      <div>{{d.data.optionType}}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <small>{{"item.optioncode" | translate }}</small>
+                      <div>{{d.data.optionCode}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div *dxTemplate="let d of 'descTemplate'">
+                  <div class="row">
+                    <div class="col">
+                      <div>{{d.data.optionName}}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div>{{d.data.optionNameCN}}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div>{{d.data.optionNameBM}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div *dxTemplate="let d of 'costTemplate'">
+                  <div class="row">
+                    <div class="col">
+                      <small>{{"item.costprice" | translate }}</small>
+                      <div>{{d.data.costPrice|number : '1.2-2'}}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <small>{{"item.taxamount" | translate }}</small>
+                      <div>{{d.data.costTaxAmount|number : '1.2-2'}}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <small>{{"item.totalcost" | translate }}</small>
+                      <div>{{d.data.costWithGST|number : '1.2-2'}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div *dxTemplate="let d of 'sellTemplate'">
+                  <div class="row">
+                    <div class="col">
+                      <small>{{"item.sellprice" | translate }}</small>
+                      <div>{{d.data.sellingPrice|number : '1.2-2'}}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <small>{{"item.taxamount" | translate }}</small>
+                      <div>{{d.data.taxAmount|number : '1.2-2'}}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <small>{{"item.totalsell" | translate }}</small>
+                      <div>{{d.data.priceWithGST|number : '1.2-2'}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div *dxTemplate="let d of 'imageTemplate'">
+                  <div class="row">
+                    <div class="col">
+                      <img src="{{getImageUrl(d.data)}}" class="img-fluid" />
+                    </div>
+                  </div>
+                </div>
+                <div *dxTemplate="let d of 'actionTemplate'">
+                  <div class="row">
+                    <div class="col">
+                      <button (click)="onNewOption()" data-toggle="tooltip" data-placement="top"
+                       title='{{"item.addoption" | translate }}' class="btn btn-sm btn-outline-info btn-block">
+                        <fa-icon [icon]="faAdd"></fa-icon>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <button (click)="onEditOption(d,'1')" data-toggle="tooltip" data-placement="top" 
+                      title='{{"item.editoption" | translate }}' class="btn btn-sm btn-outline-info btn-block">
+                        <fa-icon [icon]="faEdit"></fa-icon>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <button mwlConfirmationPopover [appendToBody]="true" [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="top"
+                        (confirm)="onDeleteOption(d,1)" data-toggle="tooltip" data-placement="top" 
+                        title='{{"item.deloption" | translate }}' class="btn btn-sm btn-outline-danger btn-block">
+                        <fa-icon [icon]="faDelete"></fa-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </dx-data-grid>
+            </div>
+          </div>
+          <!-- small screen-->
+          <div class="row" *ngIf="isSmallScreen">
+            <div class="col">
+              <dx-data-grid id="gridOption" [rowAlternationEnabled]="true" [dataSource]="optionArr" [wordWrapEnabled]="true">
+                <dxi-column caption='{{"item.image" | translate }}' cellTemplate="imgCellTemplate" width="{{imgcolWidth}}" visibleIndex=0></dxi-column>
+                <dxi-column caption='{{"item.detail" | translate }}' cellTemplate="infoCellTemplate" visibleIndex=1></dxi-column>
+
+                <div *dxTemplate="let d of 'infoCellTemplate'">
+                  <div class="row">
+                    <div class="col">
+                      <small>{{"item.optioncode" | translate }}</small>
+                      <div>{{d.data.optionCode}}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <small>{{"item.optionname" | translate }}</small>
+                      <div>{{d.data.optionName}}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div>{{d.data.optionNameCN}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div *dxTemplate="let d of 'imgCellTemplate'">
+                  <div class="row">
+                    <div class="col">
+                      <img src="{{getImageUrl(d.data)}}" width="100%" height="100" />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">
+                      <button (click)="onNewOption()" data-toggle="tooltip" data-placement="top" 
+                      title='{{"item.addoption" | translate }}' class="btn btn-sm btn-outline-light text-dark text-center">
+                        <fa-icon [icon]="faAdd"></fa-icon>
+                      </button>
+                    </div>
+                    <div class="col-4">
+                      <button (click)="onEditOption(d,'1')" data-toggle="tooltip" data-placement="top" 
+                      title='{{"item.editoption" | translate }}' class="btn btn-sm btn-outline-light text-dark text-center">
+                        <fa-icon [icon]="faEdit"></fa-icon>
+                      </button>
+                    </div>
+                    <div class="col-4">
+                      <button mwlConfirmationPopover [appendToBody]="true" [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="top"
+                        (confirm)="onDeleteOption(d,1)" data-toggle="tooltip" data-placement="top" 
+                        title='{{"item.deloption" | translate }}' class="btn btn-sm btn-outline-light text-dark text-center">
+                        <fa-icon [icon]="faDelete"></fa-icon>
+                      </button>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </dx-data-grid>
+            </div>
+          </div>
+          <!-- small screen-->
+        </div>
+        <!-- item options-->
+      </div>
+    </div>
+    <!--Option -->
+
+    <!--Add On -->
+    <div class="card border-light" *ngIf="editMode">
+      <div class="card-header">
+        <fa-icon [icon]="faCaretRight"></fa-icon>
+        <span> {{"item.addon" | translate }}</span>
+      </div>
+      <div class="card-body">
+        <!-- item Add on-->
+        <div class="form-row">
+          <div class="row">
+            <div class="col">
+              <button (click)="onNewAddOn()" data-toggle="tooltip" data-placement="top" 
+              title='{{"item.addaddon" | translate }}' class="btn btn-sm btn-outline-info btn-block">
+                <fa-icon [icon]="faAdd"></fa-icon>
+              </button>
+            </div>
+          </div>
+          <!-- big screen-->
+          <div class="row" *ngIf="!isSmallScreen">
+            <div class="form-group col">
+              <dx-data-grid id="gridAddOn" [rowAlternationEnabled]="true" [dataSource]="addOnArr" [wordWrapEnabled]="true">
+                <dxi-column caption='{{"item.pricetype" | translate }}' cellTemplate="infoTemplate" width="110">
+                </dxi-column>
+                <dxi-column caption='{{"item.description" | translate }}' cellTemplate="descTemplate">
+                </dxi-column>
+                <dxi-column caption='{{"item.costprice" | translate }}' cellTemplate="costTemplate" width="110">
+                </dxi-column>
+                <dxi-column caption='{{"item.sellprice" | translate }}' cellTemplate="sellTemplate" width="110">
+                </dxi-column>
+                <dxi-column caption='{{"item.image" | translate }}' cellTemplate="imageTemplate" width="200">
+                </dxi-column>
+                <dxi-column caption='{{"item.action" | translate }}' cellTemplate="actionTemplate" width="70">
+                </dxi-column>
+
+                <div *dxTemplate="let d of 'infoTemplate'">
+                  <div class="row">
+                    <div class="col">
+                      <small>{{"item.optiontype" | translate }}</small>
+                      <div>{{d.data.optionType}}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <small>{{"item.optioncode" | translate }}</small>
+                      <div>{{d.data.optionCode}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div *dxTemplate="let d of 'descTemplate'">
+                  <div class="row">
+                    <div class="col">
+                      <div>{{d.data.optionName}}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div>{{d.data.optionNameCN}}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div>{{d.data.optionNameBM}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div *dxTemplate="let d of 'costTemplate'">
+                  <div class="row">
+                    <div class="col">
+                      <small>{{"item.costprice" | translate }}</small>
+                      <div>{{d.data.costPrice|number : '1.2-2'}}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <small>{{"item.taxamount" | translate }}</small>
+                      <div>{{d.data.costTaxAmount|number : '1.2-2'}}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <small>{{"item.totalcost" | translate }}</small>
+                      <div>{{d.data.costWithGST|number : '1.2-2'}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div *dxTemplate="let d of 'sellTemplate'">
+                  <div class="row">
+                    <div class="col">
+                      <small>{{"item.sellprice" | translate }}</small>
+                      <div>{{d.data.sellingPrice|number : '1.2-2'}}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <small>{{"item.taxamount" | translate }}</small>
+                      <div>{{d.data.taxAmount|number : '1.2-2'}}</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <small>{{"item.totalsell" | translate }}</small>
+                      <div>{{d.data.priceWithGST|number : '1.2-2'}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div *dxTemplate="let d of 'imageTemplate'">
+                  <div class="row">
+                    <div class="col">
+                      <img src="{{getImageUrl(d.data)}}" class="img-fluid" />
+                    </div>
+                  </div>
+                </div>
+                <div *dxTemplate="let d of 'actionTemplate'">
+                  <div class="row">
+                    <div class="col">
+                      <button (click)="onNewAddOn()" data-toggle="tooltip" data-placement="top" 
+                      title='{{"item.addaddon" | translate }}' class="btn btn-sm btn btn-outline-info btn-block">
+                        <fa-icon [icon]="faAdd"></fa-icon>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <button (click)="onEditOption(d,'2')" data-toggle="tooltip" data-placement="top" 
+                      title='{{"item.editaddon" | translate }}' class="btn btn-sm btn btn-outline-info btn-block">
+                        <fa-icon [icon]="faEdit"></fa-icon>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <button mwlConfirmationPopover [appendToBody]="true" [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="top"
+                        (confirm)="onDeleteOption(d,2)" data-toggle="tooltip" data-placement="top" 
+                        title='{{"item.deladdon" | translate }}' class="btn btn-sm btn-outline-danger btn-block">
+                        <fa-icon [icon]="faDelete"></fa-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </dx-data-grid>
+            </div>
+          </div>
+          <!--small screen-->
+            <!-- small screen-->
+            <div class="row" *ngIf="isSmallScreen">
+                    <div class="col">
+                      <dx-data-grid id="gridOption" [rowAlternationEnabled]="true" [dataSource]="optionArr" [wordWrapEnabled]="true">
+                        <dxi-column caption='{{"item.image" | translate }}' cellTemplate="imgCellTemplate" width="{{imgcolWidth}}" visibleIndex=0></dxi-column>
+                        <dxi-column caption='{{"item.detail" | translate }}' cellTemplate="infoCellTemplate" visibleIndex=1></dxi-column>
+        
+                        <div *dxTemplate="let d of 'infoCellTemplate'">
+                          <div class="row">
+                            <div class="col">
+                              <small>{{"item.optioncode" | translate }}</small>
+                              <div>{{d.data.optionCode}}</div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col">
+                              <small>{{"item.optionname" | translate }}</small>
+                              <div>{{d.data.optionName}}</div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col">
+                              <div>{{d.data.optionNameCN}}</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div *dxTemplate="let d of 'imgCellTemplate'">
+                          <div class="row">
+                            <div class="col">
+                              <img src="{{getImageUrl(d.data)}}" width="100%" height="100" />
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-4">
+                              <button (click)="onNewAddOn()" data-toggle="tooltip" data-placement="top" 
+                              title='{{"item.addaddon" | translate }}' class="btn btn-sm btn-outline-light text-dark text-center">
+                                <fa-icon [icon]="faAdd"></fa-icon>
+                              </button>
+                            </div>
+                            <div class="col-4">
+                              <button (click)="onEditOption(d,'2')" data-toggle="tooltip" data-placement="top" 
+                              title='{{"item.editaddon" | translate }}' class="btn btn-sm btn-outline-light text-dark text-center">
+                                <fa-icon [icon]="faEdit"></fa-icon>
+                              </button>
+                            </div>
+                            <div class="col-4">
+                              <button mwlConfirmationPopover [appendToBody]="true" [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="top"
+                                (confirm)="onDeleteOption(d,'2')" data-toggle="tooltip" data-placement="top" 
+                                title='{{"item.deladdon" | translate }}' class="btn btn-sm btn-outline-light text-dark text-center">
+                                <fa-icon [icon]="faDelete"></fa-icon>
+                              </button>
+                            </div>
+        
+                          </div>
+        
+                        </div>
+        
+                      </dx-data-grid>
+                    </div>
+                  </div>
+                  <!-- small screen-->
+        </div>
+        <!-- item Add On-->
+      </div>
+    </div>
+    <!--Add On -->
+
+    <div class="row" *ngIf="errmsg">
+      <div class="col">
+        <div class="alert alert-danger" role="alert">
+          {{errmsg}}}
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-2 col-6">
+        <button type="button" [disabled]="!itemForm.valid" (click)="onSave()" class="btn btn-outline-info btn-block">
+          <fa-icon [icon]="faAdd"></fa-icon>
+          <span> {{"item.save" | translate }} </span>
+        </button>
+      </div>
+      <div class="col-md-2 col-6">
+        <button type="button" (click)="onCancel()" class="btn btn-outline-danger btn-block">
+          <fa-icon [icon]="faCancel"></fa-icon>
+          <span>{{"item.cancel" | translate }}</span>
+        </button>
+      </div>
+    </div>
+    <br>
+    <br>
+
+  </div>
+
+  <!-- Modal -->
+  <button id="myModel" type="button" data-backdrop="static" data-keyboard="false" style="display:none" class="btn btn btn-info"
+    data-toggle="modal" data-target="#optionModal"></button>
+  <form [formGroup]="optionForm" (ngSubmit)="SaveOption(fileUploader)" novalidate>
+    <div class="modal fade" id="optionModal" tabindex="-1" role="dialog" aria-labelledby="optionModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="optionModalLabel">{{"item.optionset" | translate }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-5">
+                <div class="row">
+                  <div class="col">
+                    <img src="{{optionImgUrl}}" class="img-fluid" />
+                    <!-- <img #croppie="croppie" class="img-fluid" 
+                          [croppieOptions]="croppieOptions" 
+                          (update)="handleUpdate($event)" /> -->
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <dx-file-uploader #fileUploader 
+                      [multiple]="false" 
+                      selectButtonText='{{"item.selectimage" | translate }}'
+                      labelText='{{"item.dropimage" | translate }}'
+                      uploadButtonText='{{"item.uploadimage" | translate }}'
+                      accept="*" 
+                      (onValueChanged)="OnFileChange($event)"
+                      (onUploadError)="handleNetworkError($event)" 
+                      uploadMode="useForm"></dx-file-uploader>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-md-7">
+                <div class="row">
+                  <div class="form-group col" [formValidationStyle]="optionForm">
+                    <label for="priceType">{{"item.optioncode" | translate }}</label>
+                    <input type="text" class="form-control" formControlName="OptionCode">
+                  </div>
+                  <div class="form-group col">
+                    <label for="priceType">{{"item.optiontype" | translate }}</label>
+                    <!-- <dx-select-box 
+                        *ngIf="isOption"
+                        [items]="optionTypes"
+                        formControlName="OptionType"                     
+                    ></dx-select-box> -->
+                    <input type="text" [readonly]="true" class="form-control" formControlName="OptionType">
+                  </div>
+                </div>
+                <div class="row" *ngIf="canEditPrice()">
+                  <div class="form-group col">
+                    <label for="priceType">{{"item.costprice" | translate }}</label>
+                    <dx-number-box formControlName="CostPrice" [required]="'isOptioPriceRequired'" format="#,##0.00" [showSpinButtons]="false"
+                      [showClearButton]="true"></dx-number-box>
+                  </div>
+                  <div class="form-group col">
+                    <label for="priceType">{{"item.taxamount" | translate }}</label>
+                    <dx-number-box formControlName="CostTaxAmount" [required]="'isOptioPriceRequired'" format="#,##0.00" [showSpinButtons]="false"
+                      [showClearButton]="true"></dx-number-box>
+                  </div>
+                  <div class="form-group col">
+                    <label for="priceType">{{"item.totalcost" | translate }}</label>
+                    <dx-number-box formControlName="CostWithGST" [required]="'isOptioPriceRequired'" format="#,##0.00" [showSpinButtons]="false"
+                      [showClearButton]="true"></dx-number-box>
+                  </div>
+                </div>
+                <!--selling price -->
+                <div class="row" *ngIf="canEditPrice()">
+                  <div class="form-group col">
+                    <label for="priceType">{{"item.sellprice" | translate }}</label>
+                    <dx-number-box [required]="'isOptioPriceRequired'" formControlName="SellingPrice" format="#,##0.00" [showSpinButtons]="false"
+                      [showClearButton]="true"></dx-number-box>
+                  </div>
+                  <div class="form-group col">
+                    <label for="priceType">{{"item.taxamount" | translate }}</label>
+                    <dx-number-box formControlName="TaxAmount" [required]="'isOptioPriceRequired'" format="#,##0.00" [showSpinButtons]="false"
+                      [showClearButton]="true"></dx-number-box>
+                  </div>
+                  <div class="form-group col">
+                    <label for="priceType">{{"item.totalsell" | translate }}</label>
+                    <dx-number-box formControlName="PriceWithGST" [required]="'isOptioPriceRequired'" format="#,##0.00" [showSpinButtons]="false"
+                      [showClearButton]="true"></dx-number-box>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col">
+                <label for="idetals">{{"item.detailen" | translate }}</label>
+                <textarea type="text" class="form-control" formControlName="OptionName">
+                </textarea>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col">
+                <label for="idetals">{{"item.detailbm" | translate }}</label>
+                <textarea type="text" class="form-control" formControlName="OptionNameBM">
+                </textarea>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col">
+                <label for="idetals">{{"item.detailcn" | translate }}</label>
+                <textarea type="text" class="form-control" formControlName="OptionNameCN">
+                </textarea>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <div class="row">
+              <div class="col">
+                <button type="submit" [disabled]="!optionForm.valid" class="btn btn-outline-info btn-block">
+                  <fa-icon [icon]="faSave"></fa-icon>
+                  <span> {{"item.saveoption" | translate }}</span>
+                </button>
+              </div>
+              <div class="col">
+                <button id="closemodel" type="button" class="btn btn-outline-danger btn-block" data-dismiss="modal">
+                  <fa-icon [icon]="faCancel"></fa-icon>
+                  <span> {{"item.cancel" | translate }}</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <!-- Modal -->
+
+  <!-- Modal Images-->
+  <button id="myModelImage" type="button" data-backdrop="static" data-keyboard="false" style="display:none" class="btn btn btn-info"
+    data-toggle="modal" data-target="#optionModalImage"></button>
+  <div class="modal fade" id="optionModalImage" tabindex="-1" role="dialog" aria-labelledby="optionModalLabelAddOn" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="optionModalLabelImage">{{"item.itemimage" | translate }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <dx-gallery  #gallery 
+                        [dataSource]="itemImages" 
+                        [height]="350" 
+                        width="100%" 
+                        [loop]="true" 
+                        (onSelectionChanged)="onItemImageChanged($event)"
+                        [showIndicator]="false">
+              <div *dxTemplate="let galleryItem of 'item'">
+                <div class="row">
+                  <div class="col">
+                    <img class="img-fluid" src="{{getImageUrl(galleryItem)}}" />
+                  </div>
+                  <div class="col-md-3 align-items-center">
+                    <hr>
+                    <div class="form-group">
+                      <dx-check-box class="form-control" text='{{"item.setdefault" | translate }}' (onValueChanged)="onDefaultImageChanged($event,galleryItem)">
+                      </dx-check-box>
+                    </div>
+                    <div class="form-group">
+                      <div class="btn btn-danger btn-block" mwlConfirmationPopover [appendToBody]="true" [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage"
+                        placement="top" (confirm)="RemoveImage(galleryItem)">{{"item.remove" | translate }}</div>
+                    </div>
+                    <hr>
+                  </div>
+                </div>
+              </div>
+            </dx-gallery>
+            <br>
+        </div>
+        <div class="modal-footer modalfooter">
+           <!-- Indicators -->
+            <ol class='carousel-indicators'>
+                <li data-target='#carousel-custom' 
+                   data-slide-to='0'  [ngClass]="{'active': isImageSelectedIndex(i) }"
+                   *ngFor="let item of itemImages; let i = index">
+
+                   <a (click)="onIndicatorClick(i)"><img src='{{getImageUrl(item)}}' width="60" height="50" alt=''/></a>
+                </li>           
+              </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Images-->
+
+  <!-- Modal AddOn -->
+  <button id="myModel2" type="button" data-backdrop="static" data-keyboard="false" style="display:none" class="btn btn btn-info"
+    data-toggle="modal" data-target="#optionModal2"></button>
+  <form [formGroup]="optionForm" (ngSubmit)="SaveOption(fileUploader2)" novalidate>
+    <div class="modal fade" id="optionModal2" tabindex="-1" role="dialog" aria-labelledby="optionModalLabel2" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="optionModalLabel2">{{"item.addon" | translate }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-5">
+                <div class="row">
+                  <div class="col">
+                    <img src="{{optionImgUrl}}" class="img-fluid" />
+                    <!-- <img #croppie="croppie" class="img-fluid" 
+                          [croppieOptions]="croppieOptions" 
+                          (update)="handleUpdate($event)" /> -->
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <dx-file-uploader #fileUploader2 
+                      [multiple]="false" 
+                      selectButtonText='{{"item.selectimage" | translate }}'
+                      labelText='{{"item.dropimage" | translate }}'
+                      uploadButtonText='{{"item.uploadimage" | translate }}' 
+                      accept="*" 
+                      (onValueChanged)="OnFileChange($event)"
+                      (onUploadError)="handleNetworkError($event)" uploadMode="useForm"></dx-file-uploader>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-md-7">
+                <div class="row">
+                  <div class="form-group col" [formValidationStyle]="optionForm">
+                    <label for="priceType">{{"item.optioncode" | translate }}</label>
+                    <input type="text" class="form-control" formControlName="OptionCode">
+                  </div>
+                  <div class="form-group col">
+                    <label for="priceType">{{"item.optiontype" | translate }}</label>
+                    <!-- <dx-select-box 
+                        *ngIf="isOption"
+                        [items]="optionTypes"
+                        formControlName="OptionType"                     
+                    ></dx-select-box> -->
+                    <input type="text" [readonly]="true" class="form-control" formControlName="OptionType">
+                  </div>
+                </div>
+                <div class="row" *ngIf="canEditPrice()">
+                  <div class="form-group col">
+                    <label for="priceType">{{"item.costprice" | translate }}</label>
+                    <dx-number-box formControlName="CostPrice" [required]="'isOptioPriceRequired'" format="#,##0.00" [showSpinButtons]="false"
+                      [showClearButton]="true"></dx-number-box>
+                  </div>
+                  <div class="form-group col">
+                    <label for="priceType">{{"item.taxamount" | translate }}</label>
+                    <dx-number-box formControlName="CostTaxAmount" [required]="'isOptioPriceRequired'" format="#,##0.00" [showSpinButtons]="false"
+                      [showClearButton]="true"></dx-number-box>
+                  </div>
+                  <div class="form-group col">
+                    <label for="priceType">{{"item.totalcost" | translate }}</label>
+                    <dx-number-box formControlName="CostWithGST" [required]="'isOptioPriceRequired'" format="#,##0.00" [showSpinButtons]="false"
+                      [showClearButton]="true"></dx-number-box>
+                  </div>
+                </div>
+                <!--selling price -->
+                <div class="row" *ngIf="canEditPrice()">
+                  <div class="form-group col">
+                    <label for="priceType">{{"item.sellprice" | translate }}</label>
+                    <dx-number-box [required]="'isOptioPriceRequired'" formControlName="SellingPrice" format="#,##0.00" [showSpinButtons]="false"
+                      [showClearButton]="true"></dx-number-box>
+                  </div>
+                  <div class="form-group col">
+                    <label for="priceType">{{"item.taxamount" | translate }}</label>
+                    <dx-number-box formControlName="TaxAmount" [required]="'isOptioPriceRequired'" format="#,##0.00" [showSpinButtons]="false"
+                      [showClearButton]="true"></dx-number-box>
+                  </div>
+                  <div class="form-group col">
+                    <label for="priceType">{{"item.totalsell" | translate }}</label>
+                    <dx-number-box formControlName="PriceWithGST" [required]="'isOptioPriceRequired'" format="#,##0.00" [showSpinButtons]="false"
+                      [showClearButton]="true"></dx-number-box>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col">
+                <label for="idetals">{{"item.detailen" | translate }}</label>
+                <textarea type="text" class="form-control" formControlName="OptionName">
+                </textarea>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col">
+                <label for="idetals">{{"item.detailbm" | translate }}</label>
+                <textarea type="text" class="form-control" formControlName="OptionNameBM">
+                </textarea>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col">
+                <label for="idetals">{{"item.detailcn" | translate }}</label>
+                <textarea type="text" class="form-control" formControlName="OptionNameCN">
+                </textarea>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <div class="row">
+              <div class="col">
+                <button type="submit" [disabled]="!optionForm.valid" class="btn btn-outline-info btn-block">
+                  <fa-icon [icon]="faSave"></fa-icon>
+                  <span> {{"item.saveaddon" | translate }}</span>
+                </button>
+              </div>
+              <div class="col">
+                <button id="closemodel2" type="button" class="btn btn-outline-danger btn-block" data-dismiss="modal">
+                  <fa-icon [icon]="faCancel"></fa-icon>
+                  <span> {{"item.cancel" | translate }}</span>
+                </button>
+              </div>
+            </div>
+            <!-- <button id="closemodel2" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit"
+                    [disabled]= "!optionForm.valid"
+                    class="btn btn btn-info" >Save changes</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <!-- Modal -->
+</form>

@@ -1,0 +1,99 @@
+<section id="main-header">
+  <nav class="navbar navbar-expand-lg ">
+    <a class="navbar-brand">
+        <a class="navbar-brand" href="#">
+            <img src="../{{imgUrl}}/logo.png" width="30" height="30" alt="">
+        </a>
+      galaEats
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="text-dark"><fa-icon [icon]="faBars"></fa-icon></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{"menu.language" | translate }}
+              </a>
+              <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" (click)="onLang('en')" >English</a>
+                <a class="dropdown-item" (click)="onLang('ch')">中文</a>
+              </div>
+          </li>
+
+        <li class="nav-item" *ngIf="!isLogin()">
+          <a class="nav-link" routerLink="/auth/login">{{"menu.login" | translate }}</a>
+        </li>
+        <li class="nav-item" *ngIf="!isLogin()">
+            <a class="nav-link" routerLink="/member/register">{{"menu.register" | translate }}</a>
+          </li>
+        <li class="nav-item" *ngIf="isLogin()">
+          <a class="nav-link" routerLink="/member/items">{{"menu.product" | translate }}</a>
+        </li>
+        <li class="nav-item" *ngIf="isLogin()">
+          <a class="nav-link" routerLink="/member/bizhours">{{"menu.bizhours" | translate }}</a>
+        </li>
+        <li class="nav-item" *ngIf="isLogin()">
+          <a class="nav-link" routerLink="/member/profile">{{"menu.profile" | translate }}</a>
+        </li>
+        <li class="nav-item" *ngIf="isLogin()">
+          <a class="nav-link" routerLink="/auth/users">{{"menu.users" | translate }}</a>
+        </li>
+        <!-- <li class="nav-item">
+        <a class="nav-link" routerLink="/auth/change">CHANGE</a>
+      </li> -->
+        <!-- <li class="nav-item" *ngIf="isLogin()">
+          <a class="nav-link" routerLink="/order/orders">
+            {{"menu.transaction" | translate }}<span class="badge badge-danger">{{totalOrder}}</span></a>
+        </li> -->
+        <li class="nav-item dropdown" *ngIf="isLogin()">
+          <a class="nav-link dropdown-toggle" routerLink="/order/orders" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{"menu.transaction" | translate }} <span class="badge badge-danger">{{totalOrder}}</span>
+          </a>
+          <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink="/order/trxorders"> {{"menu.transactionhis" | translate }}</a>
+           
+          </div>
+        </li>
+       <li class="nav-item" *ngIf="isLogin()">
+          <a class="nav-link" routerLink="/auth/logout">{{"menu.logout" | translate }}</a>
+        </li>
+        <!-- <li class="nav-item">
+        <a class="nav-link" routerLink="/product">PRODUCT</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/upload">UPLOAD</a>
+      </li> -->
+        <!-- <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Member
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/member/profile">Profile</a>
+          <a class="dropdown-item" routerLink="/member/items">Product</a>        
+          <a class="dropdown-item" routerLink="/member/bizhours">Businiess Hours</a>
+        </div>
+      </li> -->
+
+      </ul>
+    </div>
+  </nav>
+</section>
+
+<div class="container-fluid">
+    <router-outlet *ngIf="!loadingRouteConfig"></router-outlet>
+   <div *ngIf="isSmallScreen">
+      <div class="loading animated bounce delay-2s"
+          *ngIf="loadingRouteConfig" style="font-size: 1.2em" >
+        Please wait, Load<span class="d">i</span><span class="d d-2">n</span><span class="d d-3">g</span>  <span class="d">.</span><span class="d d-2">.</span><span class="d d-3">.</span>
+     </div>
+  </div>
+  <div *ngIf="!isSmallScreen">
+    <div class="loading animated bounce delay-2s"
+        *ngIf="loadingRouteConfig" style="font-size: 2.5em" >
+      Please wait, Load<span class="d">i</span><span class="d d-2">n</span><span class="d d-3">g</span>  <span class="d">.</span><span class="d d-2">.</span><span class="d d-3">.</span>
+   </div>
+</div>
+
+</div>

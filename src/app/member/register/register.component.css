@@ -1,0 +1,45 @@
+.ng-touched.ng-invalid {
+    border-color: red ;
+}
+
+
+@media (max-width: 480px) {
+    /* STYLES HERE for DEVICES with physical max-screen width of 480px */
+    .register {
+      margin: 0px;
+      margin-top: 10px;
+    }
+    form h4 {
+       font-size: 15px !important;
+    }
+  }
+  
+   /* Small devices (tablets, 768px and up) */
+   @media (min-width: 768px) { 
+    .register {
+        margin: 0px;
+      }
+      
+     
+   }
+  
+  /* Medium devices (desktops, 992px and up) */
+  @media (min-width: 992px) { 
+    .register {
+      margin-top: 10px;
+      margin-left: 200px;
+      margin-right: 200px;
+  
+    }
+    
+  }
+  
+  /* Large devices (large desktops, 1200px and up) */
+  @media (min-width: 1200px) { 
+    .register{
+      margin-top: 10px;
+      margin-left: 200px;
+      margin-right: 200px;
+    }
+   
+   }

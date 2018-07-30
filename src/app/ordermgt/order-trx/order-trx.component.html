@@ -1,0 +1,34 @@
+<div class="container">
+  <h6><fa-icon [icon]="faShoppingBasket"></fa-icon> Order Transactions</h6>
+  <dx-data-grid  #dataGrid  id="gridItem"    
+  [rowAlternationEnabled]="true" 
+  [dataSource]="customData" 
+  [wordWrapEnabled]="true">
+  <dxi-column cellTemplate="actionCellTemplate" width="50" visibleIndex=0></dxi-column>
+  <dxi-column dataField="orderDate" caption='Date' dataType="date" format="dd-MM-yyyy hh:mm a" width="150"></dxi-column>
+  <dxi-column dataField="orderNo" caption='Order No'></dxi-column>
+  <dxi-column dataField="paymentMethod" caption='Payment'></dxi-column>
+  <dxi-column dataField="fromHour" caption='From Time' format="hh:mm a"></dxi-column>
+  <dxi-column dataField="toHour" caption='To Time' format="hh:mm a"></dxi-column>
+  <dxi-column dataField="totalCost" caption='Amount' format="###0.00"></dxi-column>
+  <dxi-column dataField="totalAddonCost" caption='Add On'></dxi-column>
+  <dxi-column dataField="netTotalCost" caption='Total'></dxi-column>
+  
+  <div *dxTemplate="let d of 'actionCellTemplate'">
+      <button type="button" (click)="onItemDetails(d.data)" 
+          class="btn btn-sm btn-outline-primary btn-block">
+          <fa-icon [icon]="faBoxOpen"></fa-icon>
+      </button>
+      
+  </div>
+  
+  <dxo-state-storing [enabled]="true" [savingTimeout]="0"></dxo-state-storing>
+  <dxo-remote-operations [sorting]="true" [paging]="true">
+  </dxo-remote-operations>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-pager [visible]="true" [showPageSizeSelector]="true" [allowedPageSizes]="[5,10,20,50]">
+    <dxo-format type="fixedPoint" [precision]="2"></dxo-format>
+  </dxo-pager>
+
+</dx-data-grid>
+</div>

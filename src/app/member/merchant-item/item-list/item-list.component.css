@@ -1,0 +1,25 @@
+.griditem{
+    margin: 20px auto;
+}
+.celldata{
+    color:blue;
+    font-weight: bold;
+}
+.cellprice{
+    color:darkred;
+    font-weight: bold;
+}
+.mycol {
+    display: block;
+}
+.imagecol {
+    padding-left: 5px;
+}
+.mybut {
+ display: inline-block;
+  margin-top: 5px;
+}
+.smTitle{
+  color:darkblue;
+}
+

@@ -1,0 +1,94 @@
+.image-grid {
+    border-radius: 8px;
+    margin: 1px;
+    width: 148px;
+    height: 150px;
+}
+.ng-touched.ng-invalid {
+    border-color: red ;
+}
+.control-label.required:after { 
+  color: #d00;
+  content: "*";
+  position: absolute;
+  margin-left: 5px;
+  top:7px;
+}
+img.itemimg{
+   cursor: hand;
+}
+small {
+  color:#1C0A8C;
+}
+.form-group label {
+   font-size: smaller;
+   color:#1C0A8C;
+   padding-left: 5px;
+   padding-bottom: 1px;
+   margin-bottom: 0px !important;
+}
+
+.col-4{
+  padding-left:8px !important;
+  margin-left: 0px !important;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+    /* STYLES HERE for DEVICES with physical max-screen width of 480px */
+    form {
+      margin: 0px;
+      margin-top: 10px;
+    }
+    form h4 {
+       font-size: 15px !important;
+    }
+  }
+  
+   /* Small devices (tablets, 768px and up) */
+   @media (min-width: 768px) { 
+      form {
+        margin: 0px;
+        margin-top: 10px;
+      }
+      
+     
+   }
+  
+@media (min-width: 992px) { 
+   .itemForm{
+       margin-left: 200px;
+       margin-right: 200px;
+   }
+}
+
+.modalfooter{
+  margin-top: 30px;
+}
+#carousel-custom .carousel-indicators {
+  margin: 10px 0 0;
+  overflow: auto;
+  position: static;
+  text-align: left;
+  white-space: nowrap;
+  width: 100%;
+}
+.carousel-indicators li {
+  background-color: transparent;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  display: inline-block;
+  height: auto;
+  margin: 0 !important;
+  width: auto;
+}
+.carousel-indicators li img {
+  display: block;
+  opacity: 0.5;
+}
+.carousel-indicators li.active img {
+  opacity: 1;
+}
+.carousel-indicators li:hover img {
+  opacity: 0.75;
+}

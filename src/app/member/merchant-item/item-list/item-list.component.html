@@ -1,0 +1,200 @@
+<div [ngClass]="(isSmallScreen)?'container-fluid':'container'">
+  <div class="griditem">
+    <div class="row">
+      <div class="col-md-1 col-sm-6">
+        <button (click)="onNewItem()" class="btn btn-sm btn-outline-info text-center btn-block">
+          <fa-icon [icon]="faAdd"></fa-icon>
+        </button>
+      </div>
+    </div>
+    <!-- big screen -->
+    <dx-data-grid *ngIf="!isSmallScreen"  #dataGrid  id="gridItem" 
+   
+      [rowAlternationEnabled]="true" 
+      [dataSource]="customData" 
+      [wordWrapEnabled]="true">
+      <dxi-column caption='{{"itemlist.image" | translate }}' cellTemplate="imgCellTemplate" visibleIndex=1 width="110" ></dxi-column>
+      <dxi-column dataField="itemCode" caption='{{"itemlist.itemcode" | translate }}' visibleIndex=2></dxi-column>
+      <dxi-column caption="Item Name" caption='{{"itemlist.itemname" | translate }}'  cellTemplate="itemCellTemplate" visibleIndex=3 ></dxi-column>
+      <dxi-column dataField="itemType" caption='{{"itemlist.itemtype" | translate }}' visibleIndex=4 ></dxi-column>
+      <dxi-column dataField="itemCategory" caption='{{"itemlist.category" | translate }}' visibleIndex=5></dxi-column>
+      <dxi-column dataField="priceType" caption='{{"itemlist.pricetype" | translate }}' visibleIndex=6></dxi-column>
+      <dxi-column dataField="costWithGST" dataType="number" caption='{{"itemlist.costprice" | translate }}' visibleIndex=7>
+        <dxo-format type="fixedPoint" [precision]="2"></dxo-format>
+      </dxi-column>
+      <dxi-column dataField="priceWithGST"  dataType="number" caption='{{"itemlist.sellprice" | translate }}' visibleIndex=8>
+        <dxo-format type="fixedPoint" [precision]="2"></dxo-format>
+      </dxi-column>
+      <dxi-column dataField="itemStatus" caption='{{"itemlist.status" | translate }}' visibleIndex=9></dxi-column>
+      <!-- <dxi-column caption="Create/Update By" cellTemplate="dateCellTemplate" visibleIndex="5"></dxi-column> -->
+      <dxi-column caption='{{"itemlist.action" | translate }}' cellTemplate="actionCellTemplate" visibleIndex=10 width="90"></dxi-column>
+    
+      <div *dxTemplate="let d of 'itemCellTemplate'">
+        <div class="row flex-wrap">
+          <div class="col">
+            <p class="flex-wrap">{{d.data.itemName}}</p>
+          </div>
+        </div>
+        <div class="row flex-wrap">
+          <div class="col">
+            <p class="flex-wrap">{{d.data.itemNameCN}}</p>
+          </div>
+        </div>
+        <div class="row flex-wrap">
+          <div class="col">
+            <p class="flex-wrap">{{d.data.itemNameBM}}</p>
+          </div>
+        </div>
+      </div>
+      <div *dxTemplate="let d of 'imgCellTemplate'">
+        <div class="row">
+          <div class="col">
+            <img class="text-center" src="{{getImageUrl(d.data)}}" (click)=" onImageDetails(d.data)" width="100" height="100" />
+            <!-- <button (click)=" onImageDetails(d.data)" class="btn btn-sm btn-block btn btn-info">
+                    View Detail
+                </button>            -->
+          </div>
+        </div>
+      </div>
+      <div *dxTemplate="let d of 'actionCellTemplate'">
+        <div class="row">
+          <div class="col">
+            <button (click)="onNewItem()" class="btn btn-sm btn-outline-info text-center btn-block">
+              <fa-icon [icon]="faAdd"></fa-icon>
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button (click)="onEditItem(d)" class="btn btn-sm btn-outline-info text-center btn-block">
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-sm btn-outline-danger text-center btn-block"
+              mwlConfirmationPopover
+              [appendToBody]="true"
+              [popoverTitle]="popoverTitle"
+              [popoverMessage]="popoverMessage"
+              placement="top"
+              (confirm)="onDeleteItem(d)"
+              (cancel)="cancelClicked = true"
+              >
+              <fa-icon [icon]="faDelete"></fa-icon>
+            </button>
+          </div>
+          <!-- (onConfirm)="onDeleteItem(d)" -->
+        </div>
+      </div>
+      <dxo-state-storing [enabled]="true" [savingTimeout]="0"></dxo-state-storing>
+      <dxo-remote-operations [sorting]="true" [paging]="true">
+      </dxo-remote-operations>
+      <dxo-paging [pageSize]="5"></dxo-paging>
+      <dxo-pager [visible]="true" [showPageSizeSelector]="true" [allowedPageSizes]="[5,10,20,50]">
+        <dxo-format type="fixedPoint" [precision]="2"></dxo-format>
+      </dxo-pager>
+
+    </dx-data-grid>
+    <!-- big screen -->
+
+    <!-- small screen -->
+    <dx-data-grid *ngIf="isSmallScreen" #dataGrid  id="gridItem" 
+     
+      [rowAlternationEnabled]="true" 
+      [dataSource]="customData" 
+      [wordWrapEnabled]="true">
+      <dxi-column caption='{{"itemlist.image" | translate }}' cellTemplate="imgCellTemplate" width="{{imgcolWidth}}" visibleIndex=0 ></dxi-column>
+      <dxi-column caption='{{"itemlist.detail" | translate }}' cellTemplate="infoCellTemplate" visibleIndex=1 ></dxi-column>
+      
+      <div *dxTemplate="let d of 'infoCellTemplate'">
+            <div>
+                <small class="smTitle">{{"itemlist.itemcode" | translate }}</small>
+                <div class="mycol" >{{d.data.itemCode}}</div>            
+            </div>
+            <div >
+                <small class="smTitle">{{"itemlist.itemname" | translate }}</small>
+                <div class="mycol"> {{d.data.itemName}}</div> 
+            </div>
+     
+          <div class="row">
+              <div class="col">
+               <small class="smTitle">{{"itemlist.itemtype" | translate }}</small>
+               <div class="mycol">{{d.data.itemType}}</div>
+              </div>
+              <div class="col">
+               <small class="smTitle">{{"itemlist.category" | translate }}</small>
+               <div class="mycol">{{d.data.itemCategoty}}</div>
+             </div>
+         </div>     
+            <div class="row">
+                 <div class="col">
+                  <small class="smTitle">{{"itemlist.costprice" | translate }}</small>
+                  <div class="mycol">{{d.data.costWithGST|number : '1.2-2'}}</div>
+                 </div>
+                 <div class="col">
+                  <small class="smTitle">{{"itemlist.sellprice" | translate }}</small>
+                  <div class="mycol">{{d.data.priceWithGST|number : '1.2-2'}}</div>
+                </div>
+            </div>
+        </div> 
+
+      <div *dxTemplate="let d of 'imgCellTemplate'">
+          <div class="imagecol">
+            <div class="row">
+              <div class="col">
+                <img src="{{getImageUrl(d.data)}}" (click)=" onImageDetails(d.data)" width="100%" height="100" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <button (click)="onNewItem()" class="btn btn-sm btn-outline-light text-dark text-center">
+                  <fa-icon [icon]="faAdd"></fa-icon>
+                </button>                        
+              </div>
+              <div class="col-4">
+                <button (click)="onEditItem(d)" class="btn btn-sm btn-outline-light text-dark text-center">
+                  <fa-icon [icon]="faEdit"></fa-icon>
+                  </button>
+              </div>
+              <div class="col-4">
+                <button class="btn btn-sm btn-outline-light text-dark text-center"
+                    mwlConfirmationPopover
+                    [appendToBody]="true"
+                    [popoverTitle]="popoverTitle"
+                    [popoverMessage]="popoverMessage"
+                    placement="top"
+                    (confirm)="onDeleteItem(d)"
+                    (cancel)="cancelClicked = true"
+                    >
+                    <fa-icon [icon]="faDelete"></fa-icon>
+                </button>       
+              </div>
+                
+            </div>
+          </div>
+      </div>
+   
+      <dxo-state-storing [enabled]="true" [savingTimeout]="0"></dxo-state-storing>
+      <dxo-remote-operations [sorting]="true" [paging]="true">
+      </dxo-remote-operations>
+      <dxo-paging [pageSize]="5"></dxo-paging>
+      <dxo-pager [visible]="true" [showPageSizeSelector]="true" [allowedPageSizes]="[5,10,20,50]">
+        <dxo-format type="fixedPoint" [precision]="2"></dxo-format>
+      </dxo-pager>
+
+    </dx-data-grid>
+    <!-- small screen -->
+
+
+  </div>
+</div>

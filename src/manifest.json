@@ -1,0 +1,38 @@
+{
+  "dir": "ltr",
+  "lang": "en",
+  "name": "gala Merchant App",
+  "scope": "/merchant/",
+  "developer": {
+    "name": "TH MOK",
+    "url": "https://github.com/mokth"
+  },
+  "display": "fullscreen",
+  "start_url": "http://gala365.com.my/merchant/",
+  "theme": {
+    "images": {
+      "headerURL": "http://gala365.com.my/merchant/assets/backimg.jpg"
+    },
+    "colors": {
+      "accentcolor": "#CF723F",
+      "textcolor": "#000"
+    }
+  },
+  "short_name": "Merchant",
+  "description": "gala Merchant App",
+  "orientation": "any",
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        }
+    ]
+}

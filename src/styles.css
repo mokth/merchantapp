@@ -1,0 +1,164 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+@media (max-width: 480px) {
+    /* STYLES HERE for DEVICES with physical max-screen width of 480px */
+    form {
+      margin: 0px;
+    }
+    form h4 {
+       font-size: 15px !important;
+    }
+  }
+  
+   /* Small devices (tablets, 768px and up) */
+   @media (min-width: 768px) { 
+      form {
+        margin: 0px;
+      }
+      
+     
+   }
+  
+  /* Medium devices (desktops, 992px and up) */
+  @media (min-width: 992px) { 
+    form {
+      margin-top: 10px;
+      margin-left: 100px;
+      margin-right: 100px;
+    }
+    
+  }
+  
+  /* Large devices (large desktops, 1200px and up) */
+  @media (min-width: 1200px) { 
+    form {
+      margin-top: 10px;
+      margin-left: 100px;
+      margin-right: 100px;
+    }
+   
+   }
+  
+   form h4 {
+    background-color: blueviolet;
+    padding: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color:white;
+  }
+  
+  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color:#D7DBDD  ;
+    opacity: 1; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:#D7DBDD ; 
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: #D7DBDD;
+  }
+  
+  label i,label small {
+    display: inline;
+    
+  }
+
+  body, html {
+    height: 100%;
+}
+
+.has-danger .control-label,
+.has-danger .help-block,
+.has-danger .form-control-feedback {
+    color: #d9534f;
+}
+
+
+/* css loader*/
+.lds-roller {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+ }
+.lds-roller div {
+  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  transform-origin: 32px 32px;
+}
+.lds-roller div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background:red;
+  margin: -3px 0 0 -3px;
+}
+.lds-roller div:nth-child(1) {
+  animation-delay: -0.036s;
+}
+.lds-roller div:nth-child(1):after {
+  top: 50px;
+  left: 50px;
+}
+.lds-roller div:nth-child(2) {
+  animation-delay: -0.072s;
+}
+.lds-roller div:nth-child(2):after {
+  top: 54px;
+  left: 45px;
+}
+.lds-roller div:nth-child(3) {
+  animation-delay: -0.108s;
+}
+.lds-roller div:nth-child(3):after {
+  top: 57px;
+  left: 39px;
+}
+.lds-roller div:nth-child(4) {
+  animation-delay: -0.144s;
+}
+.lds-roller div:nth-child(4):after {
+  top: 58px;
+  left: 32px;
+}
+.lds-roller div:nth-child(5) {
+  animation-delay: -0.18s;
+}
+.lds-roller div:nth-child(5):after {
+  top: 57px;
+  left: 25px;
+}
+.lds-roller div:nth-child(6) {
+  animation-delay: -0.216s;
+}
+.lds-roller div:nth-child(6):after {
+  top: 54px;
+  left: 19px;
+}
+.lds-roller div:nth-child(7) {
+  animation-delay: -0.252s;
+}
+.lds-roller div:nth-child(7):after {
+  top: 50px;
+  left: 14px;
+}
+.lds-roller div:nth-child(8) {
+  animation-delay: -0.288s;
+}
+.lds-roller div:nth-child(8):after {
+  top: 45px;
+  left: 10px;
+}
+@keyframes lds-roller {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* css loader*/

@@ -1,0 +1,181 @@
+ <div class="container"> 
+   <div class="row">
+       <div class="col-1">
+          <button type="button" (click)="goBack()"
+          class="btn btn-sm btn-outline-primary btn-block">
+          <fa-icon [icon]="faback"></fa-icon> Back</button>
+       </div>
+       <div class="col">
+           <h6>Order No: {{orderno}}</h6>
+       </div>
+   </div>
+  <dx-data-grid id="gridContainer"
+      [dataSource]="orderitems"
+      [masterDetail]="{ enabled: true, template: 'detail',autoExpandAll:true }"
+      keyExpr="id">
+      <dxi-column cellTemplate="rowNumber" width="40" caption="No." visibleIndex=0 *ngIf="!viewOnly"></dxi-column>
+      <dxi-column cellTemplate="actionTemplate" width="90" visibleIndex=1 ></dxi-column>
+      <dxi-column cellTemplate="imgCellTemplate" width="130" visibleIndex=1 ></dxi-column>
+      <dxi-column dataField="itemCode"  caption="Item Code" width="100"></dxi-column>
+      <dxi-column dataField="itemName" caption="Name" cellTemplate="nameTemplate" ></dxi-column>
+      <dxi-column dataField="lineStatus" caption="Status" width="70" ></dxi-column>
+      <dxi-column dataField="quantity"  dataType="number" caption="Quantity" width="80"></dxi-column>
+      <dxi-column dataField="costWithGST"  dataType="number" format="###0.00" caption="U.Price" width="80"></dxi-column>
+      <dxi-column dataField="totalCost"  dataType="number" format="###0.00" caption="Amount" width="90"></dxi-column>
+      <dxi-column dataField="totalAddonCost"  dataType="number" format="###0.00" caption="AddOn" width="90"></dxi-column>
+      <dxi-column dataField="netTotalCost"  dataType="number" format="###0.00" caption="Total Amount" width="90"></dxi-column>
+      <dxo-summary>
+          <dxi-total-item
+              summaryType="sum"
+              displayFormat="{0}"
+              valueFormat="###0.00"
+              column="netTotalCost">
+          </dxi-total-item>
+          <dxi-total-item
+              summaryType="sum"
+              displayFormat="{0}"
+              valueFormat="###0.00"
+              column="totalAddonCost">
+          </dxi-total-item>
+          <dxi-total-item
+              summaryType="sum"
+              displayFormat="{0}"
+              valueFormat="###0.00"
+              column="totalCost">
+          </dxi-total-item>
+          <dxi-total-item
+              summaryType="sum"
+              displayFormat="{0}"
+              column="quantity">
+          </dxi-total-item>
+        </dxo-summary>
+        <div *dxTemplate="let row of 'actionTemplate'" >
+            <div >    
+                <div class="row">
+                    <div class="col">
+                        <button type="button"
+                                [disabled]="row.data.lineStatus=='Accept'|| row.data.lineStatus=='Decline'"
+                                (click)="OnAccept(row)"
+                                class="btn btn-sm btn-success btn-block">Accept</button>
+                    </div>
+                </div>
+                <div class="row rowitem">
+                    <div class="col">
+                        <button type="button"
+                               [disabled]="row.data.lineStatus=='Accept'|| row.data.lineStatus=='Decline'"
+                             
+                                (click)="OnDecline(row)"
+                                class="btn btn-sm btn-danger btn-block">Decline</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *dxTemplate="let data of 'rowNumber'">
+            <div style="text-align: right;">{{getRowNumber(data)}}.</div>
+        </div>
+      <div *dxTemplate="let d of 'imgCellTemplate'">
+        <div class="imagecol">      
+              <img src="{{getImageUrl(d.data)}}"  width="100%" height="100" />
+        </div>
+      </div>
+
+      <div *dxTemplate="let d of 'nameTemplate'">
+          <div class="row">
+             <div class="col">
+                {{d.data.itemName}}
+             </div>
+          </div>
+          <div class="row">
+              <div class="col">
+                  {{d.data.itemNameCN}}
+              </div>
+           </div>
+        </div>
+
+      <div *dxTemplate="let addon of 'detail'" >
+          <div class="row" *ngIf="isHasItem(addon.data)">
+             <div class="col offset-md-3">
+                <div class="master-detail-caption">Add On</div>
+                <dx-data-grid
+                    [dataSource]="getAddOn(addon.data)"
+                    [showBorders]="true"
+                    [columnAutoWidth]="true">
+                        <dxi-column cellTemplate="rowNumber" width="40" caption="No." visibleIndex=0></dxi-column>
+                        
+                        <dxi-column cellTemplate="imgAddOnTemplate" width="110" visibleIndex=2 ></dxi-column>
+                        <dxi-column dataField="optionCode" caption="Add On"  width="100"></dxi-column>
+                        <dxi-column dataField="itemName" caption="Name" cellTemplate="addOnnameTemplate" ></dxi-column>
+                        <dxi-column dataField="quantity"  dataType="number" caption="Quantity" width="90" ></dxi-column>
+                        <dxi-column dataField="costWithGST"  dataType="number" format="###0.00" caption="U.Price" width="90"></dxi-column>
+                        <dxi-column dataField="totalAddonCost"  dataType="number" format="###0.00" caption="Amount" width="100"></dxi-column>
+                        <dxo-summary>
+                            <dxi-total-item
+                                summaryType="sum"
+                                displayFormat="{0}"
+                                valueFormat="###0.00"
+                                column="totalAddonCost">
+                            </dxi-total-item>
+                            <dxi-total-item
+                                summaryType="sum"
+                                displayFormat="{0}"
+                                column="quantity">
+                            </dxi-total-item>                            
+                          </dxo-summary>
+                         <div *dxTemplate="let data of 'rowNumber'">
+                              <div style="text-align: right;">{{getRowNumber(data)}}.</div>
+                          </div>
+                       
+                        <div *dxTemplate="let d of 'imgAddOnTemplate'">
+                          <div class="imagecol">      
+                                <img src="{{getAddOnImageUrl(d.data)}}"  width="100%" height="100" />
+                          </div>
+                        </div>
+                        <div *dxTemplate="let d of 'addOnnameTemplate'">
+                            <div class="row">
+                               <div class="col">
+                                  {{d.data.optionName}}
+                               </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    {{d.data.optionNameCN}}
+                                </div>
+                             </div>
+                          </div>
+                </dx-data-grid>
+            </div>
+        </div>
+      </div>
+  </dx-data-grid>
+  <dx-popup
+  class="popup"
+  [width]="popWidth"
+  [height]="popHeight"
+  [showTitle]="true"
+  title="Information"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="true"
+  [(visible)]="popupVisible">
+  <div *dxTemplate="let data of 'content'">
+        <form class="container">
+        <div class="form-group">
+            <label for="reason">Decline Reason</label>
+            <textarea [(ngModel)]="reason" name="reason" #ctrl="ngModel" required id="reason" cols="55" rows="5"></textarea>
+        </div>
+        <div class="row">
+            <div class="col">
+                    <button type="button" 
+                            (click)="DeclineItem()"
+                            class="btn btn-primary">Submit</button>
+            </div>
+            <div class="col">
+                    <button type="button" 
+                            (click)="CancelDecline()"
+                            class="btn btn-danger">Cancel</button>
+            </div>
+        </div>
+       
+      </form>
+  </div>
+</dx-popup>
+</div>

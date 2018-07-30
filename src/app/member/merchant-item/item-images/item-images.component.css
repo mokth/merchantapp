@@ -1,0 +1,42 @@
+.gallery {
+    margin-top: 20px;
+}
+.itemImage {
+    border-radius: 10px;
+}
+
+small {
+    color:#1C0A8C;
+  }
+.bg-set {
+  background-color: #5499C7;
+}
+.bg-main {
+    background-color: #922B21 ;
+}
+.bg-addon {
+    background-color: #17A589 ;
+}
+
+@media (max-width: 480px) {
+    /* STYLES HERE for DEVICES with physical max-screen width of 480px */
+    .card {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+  }
+  
+   /* Small devices (tablets, 768px and up) */
+   @media (min-width: 768px) { 
+    .card {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+   }
+  
+@media (min-width: 992px) { 
+    .card {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+}

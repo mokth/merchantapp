@@ -1,0 +1,33 @@
+.blink{
+   color: rgb (0, 137, 226);
+    
+    animation: blink 2s infinite;
+ }
+ 
+ @keyframes blink{
+    0%{opacity: 1;}
+    75%{opacity: 1;}
+    76%{ opacity: 0;}
+    100%{opacity: 0;}
+ }
+
+ /* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+  .cardwidth{
+      width: 100%;
+  }
+ }
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+    .cardwidth{
+        width: 15rem;
+    }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+    .cardwidth{
+        width: 15rem;
+    }
+ }

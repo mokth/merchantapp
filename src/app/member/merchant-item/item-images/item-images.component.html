@@ -1,0 +1,189 @@
+<div class="container">
+  <div class="row imgrow">
+      <div class="col-md-3"  *ngFor="let item of images; let i = index">
+        <div class="card text-center border-secondary " [ngClass]="'cardwidth'">
+          <div class="card-header  text-white {{getHeaderBk(item)}}">
+            <div class="row align-items-center">
+              <div class="col">
+                  {{item.optionCode}}
+              </div>
+              <!-- <div class="col-3">
+                <img class="float-left blink" src="../../../{{imgUrl}}/offer.png" width="40px" height="40px" >
+              </div> -->
+            </div>
+          </div>
+          <img src="{{getImageUrl(item)}}" width="100%" height="240" alt="{{item.itemCode}}">
+        
+          <div class="card-body">
+            <!-- <p class="card-text lead text-white bg-danger blink">{{item.optionCode}}</p> -->
+            <!-- <div class="card-title">{{item.itemName}}</div> -->
+            <div class="card-text">{{item.optionName}}</div>
+            <div class="card-text">{{item.optionNameCN}}</div>
+            <div class="row">
+              <div class="col">
+                <small> Selling Price</small>
+                  <div>(RM) {{item.priceWithGST |number : '1.2-2'}}</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <small> Cost Price  </small>
+                <div>(RM) {{item.costWithGST |number : '1.2-2'}}</div>
+              </div>         
+            </div>
+            <div class="row">
+                <div class="col">
+                  <small>Type</small>
+                  <div>{{item.optionType}}</div>
+              </div>
+            </div>
+            
+            
+          </div>
+
+        </div>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-md-2 col">
+          <button type="button" (click)="goBack()"
+           class="btn btn-outline-primary btn-block">
+           <fa-icon [icon]="faBack"></fa-icon> Back</button>
+        </div>
+  </div>
+</div>
+
+
+<!-- <div class="container">
+  <div class="row gallery">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-10">
+      <dx-gallery [dataSource]="Options" [height]="500" itemTemplate="item">
+        <div *dxTemplate="let data of 'item'">
+          <div class="row text-left">
+            <div class="col text-center">
+              <img class="img-fluid itemImage" src="{{getImageUrl(data)}}" alt="{{data.optionCode}}" />
+            </div>
+            <div class="col-md-4">
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <b>Item Code</b>
+                </div>
+                <div class="col">
+                  {{data.itemCode}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <b>Option Code</b>
+                </div>
+                <div class="col">
+                  {{data.optionCode}}
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col">
+                    <b>Type</b>
+                  </div>
+                  <div class="col">
+                    {{data.OptionType}}
+                  </div>
+                </div>
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <b>Name</b>
+                </div>
+                <div class="col">
+                  {{data.optionName}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <b>中文</b>
+                </div>
+                <div class="col">
+                  {{data.optionNameCN}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <b>Bahasa</b>
+                </div>
+                <div class="col">
+                  {{data.optionNameBM}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <b>Cost Price</b>
+                </div>
+                <div class="col">
+                  {{data.costPrice|number : '1.2-2'}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <b>Tax Amount</b>
+                </div>
+                <div class="col">
+                  {{data.costTaxAmount|number : '1.2-2'}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <b>Total Cost</b>
+                </div>
+                <div class="col">
+                  {{data.costWithGST|number : '1.2-2'}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <b>Selling Price</b>
+                </div>
+                <div class="col">
+                  {{data.sellingPrice|number : '1.2-2'}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <b>Tax Amount</b>
+                </div>
+                <div class="col">
+                  {{data.taxAmount|number : '1.2-2'}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <b>Total Price</b>
+                </div>
+                <div class="col">
+                  {{data.priceWithGST|number : '1.2-2'}}
+                </div>
+              </div>
+              <hr>
+             
+            </div>
+          </div>
+
+
+        </div>
+      </dx-gallery>
+    </div>
+    <div class="col-md-1">
+    </div>
+  </div>
+  <div class="row justify-content-center">
+      <div class="col-md-2">
+          <button type="button" (click)="goBack()"
+           class="btn btn-outline-primary btn-block">
+           <fa-icon [icon]="faBack"></fa-icon> Back</button>
+
+      </div>
+</div>
+</div> -->

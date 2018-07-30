@@ -1,0 +1,100 @@
+<form [formGroup]="profileForm" class="register">
+    <div class="container">
+      <h4>  {{"profile.register" | translate }}</h4>
+      <!--Company INFO -->
+      <div class="card">
+        <div class="card-header">
+          {{"profile.companyinfo" | translate }}
+        </div>
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-group col-md-6" >
+              <label for="compName">{{"profile.companyname" | translate }}</label>
+              <input type="text" class="form-control"  formControlName="CompanyName">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="compReg">{{"profile.compregno" | translate }}</label>
+                <input type="text" class="form-control"  formControlName="RegNo">
+            </div>
+          </div>
+          <div class="form-group">
+              <label for="inputAddress">{{"profile.address1" | translate }}</label>
+              <input type="text" class="form-control" formControlName="Address1">
+            </div>
+            <div class="form-group">
+              <label for="inputAddress2">{{"profile.address2" | translate }}</label>
+              <input type="text" class="form-control" formControlName="Address2">
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputCity">{{"profile.city" | translate }}</label>
+                <input type="text" class="form-control" formControlName="AddrCity">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="inputState">{{"profile.state" | translate }}</label>
+                <dx-select-box 
+                [items]="state"
+                formControlName ="AddrState"
+                [showClearButton]="true"
+            ></dx-select-box>      
+              </div>
+              <div class="form-group col-md-2">
+                <label for="inputZip">{{"profile.zip" | translate }}</label>
+                <input type="text" class="form-control" formControlName="Postcode">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="offPone">{{"profile.officephone" | translate }}</label>
+                <input type="text" class="form-control" formControlName="OfficePhone">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="handPhone">{{"profile.mobilephone" | translate }}</label>
+                <input type="text" class="form-control" formControlName="Handphone">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="contact">{{"profile.contactperson" | translate }}</label>
+                <input type="text" class="form-control" formControlName="ContactPIC">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="faxNo">{{"profile.email" | translate }}</label>
+                <dx-text-box mode="email" class="form-control" formControlName="Email"></dx-text-box>
+               </div>
+               <div class="form-group col">
+                  <label for="aboutUs">{{"profile.aboutus" | translate }}
+                    <i>
+                      <small class="form-text text-danger">{{"profile.max1000" | translate }}</small>
+                    </i>
+                  </label>
+                  <textarea type="text" class="form-control" formControlName="AboutUs">
+                  </textarea>
+                </div>
+            </div>
+        </div>
+      </div>
+      <!--Company INFO -->
+       
+       
+      <div class="row" *ngIf="errmsg">
+          <div class="col">
+              <div class="alert alert-danger" role="alert">
+                 {{errmsg}}
+                </div>
+          </div>
+        </div>
+      <!--Note -->
+      <hr>
+      <div class="row">
+          <div class="col-md-2">
+            <button type="button"
+            [disabled]= "!profileForm.valid"
+            (click)="SaveReg()" class="btn btn-outline-primary btn-block" width="120">{{"profile.signon" | translate }}</button>
+          </div>
+      </div>
+     
+    </div>
+    <br>
+    <br>
+  </form>
